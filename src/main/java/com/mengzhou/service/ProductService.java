@@ -2,6 +2,7 @@ package com.mengzhou.service;
 
 import com.mengzhou.dto.ProductDTO;
 import com.mengzhou.entities.Product;
+import com.mengzhou.mapper.ProductMapper;
 import com.mengzhou.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +24,6 @@ public class ProductService {
             products = productRepository.findAll(pageable);
         }
 
-        return products.map(p -> new ProductDTO(p.getName(), p.getCategory(), p.getPrice()));
+        return products.map(ProductMapper.INSTANCE::toDTO);
     }
 }
